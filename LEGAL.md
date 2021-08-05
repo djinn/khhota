@@ -1,4 +1,4 @@
-#Original license compliance
+# Original license compliance
 Fixing possible license issues
 
 The source code for [Khhota](https://github.com/djinn/khhota) is significantly
@@ -437,6 +437,56 @@ index 95b0bef..57d28f9 100644
 ```
 
 Given the above diff, it is fair to maintain the license from the original repo.
+
+Since we do not have write access to **khhota** (Donkey BASIC) we shall work on
+a fork and apply the patches.
+
+```
+dt=$(date +%s)
+mkdir ${dt}
+pushd ${dt}
+  git clone https://github.com/hindawiai/khhota
+  git clone https://github.com/mbutterick/beautiful-racket
+  pushd beautiful-racket
+  git checkout b0d133f4ba4149ea506d8b0dbd3845c915efdd06
+  popd
+  for n in $(find khhota/ | grep rkt$)
+  do
+    fn=$(basename ${n})
+    for s in $(find beautiful-racket/ | grep ${fn})
+    do
+      printf "%d differences found while comparing ${n} ${s}\n" $(diff ${n} ${s} | wc -l)
+    done | grep $n | sort -n | head -1
+  done | sort -rn | tee >/dev/stderr \
+  >(printf "Total %d files possible analysis candidates\n" $(wc -l))\
+  >(awk '{ if ($1=="0"){
+             print "Files " $6 " and " $7 " are possibly identical with the following SHA256 sums"
+             system("sha256sum " $6 " && sha256sum " $7)
+           }
+         }')\
+  >(awk '{ system("cp -f " $7 " " $6 " && cd beautiful-racket && git diff -w")
+         }')
+  cp beautiful-racket/LICENSE.md khhota/LICENSE.md
+  cp beautiful-racket/LICENSE.md khhota/LICENSE
+  for n in $(find khhota/ | grep rkt$)
+  do
+    cat ${n} |\
+    awk 'BEGIN { print ";; MIT License";
+                 print ";; Copyright (c) 2016-21 Matthew Butterick";
+                 print ";; Based on https://github.com/mbutterick/beautiful-racket"
+               }
+         /.*/  {print}
+         END  { print ";; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md"; }' > ${n}.tmp
+     cp -f ${n}.tmp ${n}
+  done
+  cd khhota
+  find . -type f | grep -v '\.git' | xargs git add
+  git commit -m "SHARM-Honor: Shell Automated Resource Management towards FOSS Honor"
+popd
+```
+
+The above changes shall be pushed through a pull request to ensure compliance upstream, however,
+we cannot guarantee changes in other repositories.
 
 References as accessed on 2021-08-05:
 ```
