@@ -4,7 +4,7 @@ It is written in rage because people talk a lot of about programming in native l
 ````console
 $ raco pkg install ./khhota
 
-```
+````
 
 # Demonstration Language
 Khhota is designed as a demo piece implementing the minimum set of BASIC lexicon. If there is more interest, I will continue to write a full fledged interpreter
