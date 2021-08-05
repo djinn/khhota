@@ -1,22 +1,26 @@
+;; MIT License
+;; Copyright (c) 2016-21 Matthew Butterick
+;; Based on https://github.com/mbutterick/beautiful-racket
 #lang br
 (require brag/support)
 
 (define-lex-abbrev digits (:+ (char-set "0123456789")))
 
-(define khhota-lexer
-	(lexer-srcloc
-		["\n" (token 'NEWLINE lexeme)]
-		[whitespace (token lexeme #:skip? #t)]
-		[(from/stop-before "ਟਿੱਪਣੀ" "\n") (token 'REM lexeme)]
-		[(:or "ਛਾਪੋ" "ਜਾ" "ਅੰਤ" "+" ":" ";") (token lexeme)]
-		[digits (token 'INTEGER (string->number lexeme))]
-		[(:or (:seq (:? digits) "." digits)
+(define basic-lexer
+  (lexer-srcloc
+   ["\n" (token 'NEWLINE lexeme)]
+   [whitespace (token lexeme #:skip? #t)]
+   [(from/stop-before "rem" "\n") (token 'REM lexeme)]
+   [(:or "print" "goto" "end"
+         "+" ":" ";") (token lexeme lexeme)]
+   [digits (token 'INTEGER (string->number lexeme))]
+   [(:or (:seq (:? digits) "." digits)
          (:seq digits "."))
-    	(token 'DECIMAL (string->number lexeme))]
-    	[(:or (from/to "\"" "\"") (from/to "'" "'"))
-    		(token 'STRING
-           		(substring lexeme
-                      1 (sub1 (string-length lexeme))))]
-	))
+    (token 'DECIMAL (string->number lexeme))]
+   [(:or (from/to "\"" "\"") (from/to "'" "'"))
+    (token 'STRING
+           (substring lexeme
+                      1 (sub1 (string-length lexeme))))]))
 
-(provide khhota-lexer)
+(provide basic-lexer)
+;; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md

@@ -1,13 +1,8 @@
+;; MIT License
+;; Copyright (c) 2016-21 Matthew Butterick
+;; Based on https://github.com/mbutterick/beautiful-racket
 #lang brag
-b-program : [b-line] (NEWLINE [b-line])*
-b-line : b-line-num [b-statement] (":" [b-statement])* [b-rem]
-b-line-num : INTEGER
-b-statement : b-end | b-print | b-goto
-b-rem : REM
-b-end : "ਅੰਤ"
-b-print : "ਛਾਪੋ" [b-printable] (";" [b-printable])*
-b-printable : STRING | b-expr
-b-goto : "ਜਾ" b-expr
-b-expr : b-sum
-b-sum : b-number ("+" b-number)*
-b-number : INTEGER | DECIMAL
+jsonic-program : (jsonic-char | jsonic-sexp)*
+jsonic-char    : CHAR-TOK
+jsonic-sexp    : SEXP-TOK
+;; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md
