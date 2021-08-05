@@ -477,7 +477,7 @@ pushd ${dt}
                }
          /.*/  {print}
          END  { print ";; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md"; }' > ${n}.tmp
-     cp -f ${n}.tmp ${n}
+     cp -f ${n}.tmp ${n} && rm ${n}.tmp
   done
   cd khhota
   find . -type f | grep -v '\.git' | xargs git add
