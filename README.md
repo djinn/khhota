@@ -1,10 +1,12 @@
-# khhota (ਖੋਤਾ) or Donkey is Basic interpreter in Punjabi 
-It is written in rage because people talk a lot of about programming in native language. Khhota uses [racket](https://racket-lang.org) to base the design. To install, first install racket followed by:
+# pyaara or Cute is a BASIC interpreter in Punjabi 
 
-````console
-$ raco pkg install ./khhota
+Pyaara BASIC was initialy started with a different name by @djinn at https://github.com/djinn/khhota
 
-````
+It is derived from https://github.com/mbutterick/beautiful-racket/ by @mbutterick and most of the 
+source code is from the demos.
 
-# Demonstration Language
-Khhota is designed as a demo piece implementing the minimum set of BASIC lexicon. If there is more interest, I will continue to write a full fledged interpreter
+We believe Pyaara BASIC can become a wonderful enabler of
+universal inclusion of computing resources and hence renamed it Pyaara - aka Love 
+
+MIT License
+See details in LICENSE.md
