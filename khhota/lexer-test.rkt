@@ -1,35 +1,34 @@
-#lang br 
+;; MIT License
+;; Copyright (c) 2016-21 Matthew Butterick
+;; Based on https://github.com/mbutterick/beautiful-racket
+#lang br
 (require "lexer.rkt" brag/support rackunit)
+
 (define (lex str)
-	(apply-port-proc khhota-lexer str))
+  (apply-port-proc basic-lexer str))
 
-(check-equal? (lex "")  empty)
-
-(check-equal? 
-	(lex " ")
-	(list (srcloc-token (token " " #:skip #t)
-		(srcloc 'string 1 0 1 1)))
-)
-
-(check-equal? 
-	(lex "ਟਿੱਪਣੀ ignored\n")
-	(list (srcloc-token (token 'REM "ਟਿੱਪਣੀ ignored")
+(check-equal? (lex "") empty)
+(check-equal?
+ (lex " ")
+ (list (srcloc-token (token " " #:skip? #t)
+                     (srcloc 'string 1 0 1 1))))
+(check-equal?
+ (lex "rem ignored\n")
+ (list (srcloc-token (token 'REM "rem ignored")
                      (srcloc 'string 1 0 1 11))
        (srcloc-token (token 'NEWLINE "\n")
-                     (srcloc 'string 1 11 12 1)))	
-)
-
+                     (srcloc 'string 1 11 12 1))))
 (check-equal?
- (lex "ਛਾਪੋ")
- (list (srcloc-token (token "ਛਾਪੋ" "ਛਾਪੋ")
+ (lex "print")
+ (list (srcloc-token (token "print" "print")
                      (srcloc 'string 1 0 1 5))))
 (check-equal?
- (lex "ਜਾ")
- (list (srcloc-token (token "ਜਾ" "ਜਾ")
+ (lex "goto")
+ (list (srcloc-token (token "goto" "goto")
                      (srcloc 'string 1 0 1 4))))
 (check-equal?
- (lex "ਅੰਤ")
- (list (srcloc-token (token "ਅੰਤ" "ਅੰਤ")
+ (lex "end")
+ (list (srcloc-token (token "end" "end")
                      (srcloc 'string 1 0 1 3))))
 (check-equal?
  (lex "+")
@@ -68,3 +67,4 @@
  (list (srcloc-token (token 'STRING "foo")
                      (srcloc 'string 1 0 1 5))))
 (check-exn exn:fail:read? (lambda () (lex "x")))
+;; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md

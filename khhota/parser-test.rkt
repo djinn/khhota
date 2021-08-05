@@ -1,12 +1,30 @@
+;; MIT License
+;; Copyright (c) 2016-21 Matthew Butterick
+;; Based on https://github.com/mbutterick/beautiful-racket
 #lang br
-(require khhota/parser khhota/tokenizer brag/support)
+(require "parser.rkt" "tokenizer.rkt" brag/support rackunit)
 
-(define str #<<HERE
-
-10 ਛਾਪੋ "hello" : ਛਾਪੋ "world"
-20 ਜਾ 9 + 10 + 11
-30 ਅੰਤ
-HERE
-)
-
-(parse-to-datum (apply-tokenizer make-tokenizer str))
+(check-equal?
+ (parse-to-datum
+  (apply-tokenizer-maker make-tokenizer "// line commment\n"))
+ '(jsonic-program))
+(check-equal?
+ (parse-to-datum
+  (apply-tokenizer-maker make-tokenizer "@$ 42 $@"))
+ '(jsonic-program (jsonic-sexp " 42 ")))
+(check-equal?
+ (parse-to-datum
+  (apply-tokenizer-maker make-tokenizer "hi"))
+ '(jsonic-program
+   (jsonic-char "h")
+   (jsonic-char "i")))
+(check-equal?
+ (parse-to-datum
+  (apply-tokenizer-maker make-tokenizer
+                         "hi\n// comment\n@$ 42 $@"))
+ '(jsonic-program
+   (jsonic-char "h")
+   (jsonic-char "i")
+   (jsonic-char "\n")
+   (jsonic-sexp " 42 ")))
+;; Processed for legal compliance https://github.com/hindawiai/khhota/LEGAL.md
