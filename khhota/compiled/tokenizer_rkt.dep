@@ -1,1 +1,0 @@
-("8.2" ta6osx ("ea1a6fd41df352af620e2732e4112cc8e32e7a1b" . "de85261da4461ed3f1c356b657a4330929ab2e1b") (collects #"br" #"main.rkt") (collects #"brag" #"support.rkt") (collects #"khhota" #"lexer.rkt") (collects #"racket" #"runtime-config.rkt"))

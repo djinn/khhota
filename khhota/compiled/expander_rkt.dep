@@ -1,1 +1,0 @@
-("8.2" ta6osx ("5f52bf7e5556dd0c7cce6f59b19b1e182bd4ebda" . "29cbc6f5e5e913b91bfbb1892e9cb658026aeb0e") (collects #"br" #"quicklang.rkt") (collects #"racket" #"runtime-config.rkt"))

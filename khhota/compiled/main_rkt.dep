@@ -1,1 +1,0 @@
-("8.2" ta6osx ("086fadcbee700e676393ac41fc26d24f5d637fbf" . "3f54a43fc3539af9d45c031ca9d0e27d9b96c409") (collects #"br" #"quicklang.rkt") (collects #"khhota" #"parser.rkt") (collects #"khhota" #"tokenizer.rkt") (collects #"racket" #"runtime-config.rkt"))
