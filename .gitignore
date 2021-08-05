@@ -1,4 +1,11 @@
+*~
+\#*
+.#*
+.DS_Store
+*.bak
+compiled/
 *.ss~
+*.zo
 *.ss#*
 .#*.ss
 
