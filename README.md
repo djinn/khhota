@@ -8,3 +8,9 @@ $ raco pkg install ./khhota
 
 # Demonstration Language
 Khhota is designed as a demo piece implementing the minimum set of BASIC lexicon. If there is more interest, I will continue to write a full fledged interpreter
+
+
+# Attribution to Beautiful Racket
+This code base does not claim to be original work. In fact, it is highly derivitive taking Beautiful Racket Basic exampl en-masse. 
+
+
