@@ -11,6 +11,6 @@ Khhota is designed as a demo piece implementing the minimum set of BASIC lexicon
 
 
 # Attribution to Beautiful Racket
-This code base does not claim to be original work. In fact, it is highly derivitive taking Beautiful Racket Basic exampl en-masse. 
+This code base does not claim to be original work. In fact, it is highly derivitive taking Beautiful Racket Basic exampl en-masse. [Beautiful Racket](https://beautifulracket.com) is an amazing read. 
 
 
